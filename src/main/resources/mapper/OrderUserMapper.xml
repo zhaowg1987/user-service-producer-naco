@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiukeshuke.userserviceproducernaco.user.dao.OrderUserDao">
+
+    <resultMap id="BaseResultMap" type="com.jiukeshuke.userserviceproducernaco.entity.OrderUser">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_name" property="user_name" jdbcType="VARCHAR"/>
+        <result column="real_name" property="real_name" jdbcType="VARCHAR"/>
+        <result column="user_mobile" property="user_mobile" jdbcType="BIGINT"/>
+        <result column="create_time" property="create_time" jdbcType="DATE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_name,real_name,user_mobile,create_time
+    </sql>
+
+    <insert id="insertOrderUser" parameterType="com.jiukeshuke.userserviceproducernaco.entity.OrderUser">
+        INSERT INTO
+            order_user(user_name,real_name,user_mobile,create_time)
+        VALUES
+            (#{user_name,jdbcType=VARCHAR}, #{real_name,jdbcType=VARCHAR},
+            #{user_mobile,jdbcType=BIGINT},#{create_time,jdbcType=DATE})
+    </insert>
+
+    <select id="selectOrderUserById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM order_user
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+
+</mapper>
